@@ -1,9 +1,13 @@
+export enum TRANSPORTER_TYPE {
+    MAILTRAP,
+    GMAIL,
+}
 export interface BasicEmailOptions {
     to: string;
     text: string;
     html: string;
     subject: string;
-    transporterType: 'mailtrap' | 'gmail';
+    transporterType: TRANSPORTER_TYPE;
 }
 
 // just an example of the TS beauty.

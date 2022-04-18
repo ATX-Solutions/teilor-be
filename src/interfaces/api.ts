@@ -9,4 +9,5 @@ export interface ResponsBody {
 export interface SendResponse {
     res: Response;
     body: ResponsBody;
+    includeBodyOnSlack: boolean;
 }

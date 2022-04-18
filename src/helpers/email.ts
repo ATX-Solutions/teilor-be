@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
-import { BasicEmailOptions } from '../interfaces/email';
+import { BasicEmailOptions, TRANSPORTER_TYPE } from '../interfaces/email';
 
 const mailtrapTransporter = nodemailer.createTransport({
     host: 'smtp.mailtrap.io',
@@ -27,7 +27,8 @@ const sendInfoEmail = async ({
     text,
     html,
 }: BasicEmailOptions): Promise<SMTPTransport.SentMessageInfo> => {
-    const transporter = transporterType === 'mailtrap' ? mailtrapTransporter : gmailTransporter;
+    const transporter = transporterType === TRANSPORTER_TYPE.MAILTRAP ? mailtrapTransporter : gmailTransporter;
+
     return transporter.sendMail({
         from: process.env.DEFAULT_SENDER,
         to,
