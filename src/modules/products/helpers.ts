@@ -1,5 +1,5 @@
-import { sendInfoEmail } from '../../helpers/email';
 import { ProductResponse } from './interfaces';
+import { sendInfoEmail } from '../../helpers/email';
 
 const buildText = (data: ProductResponse) => {
     return `
@@ -13,11 +13,11 @@ const buildText = (data: ProductResponse) => {
 </div>`;
 };
 
-export const sendProductEmail = async (data: ProductResponse, productId: string) => {
+export const sendProductEmail = async (data: ProductResponse, productId: string, to: string) => {
     try {
         const result = await sendInfoEmail({
             transporterType: 'gmail',
-            to: 'parascarobert@gmail.com',
+            to,
             subject: `List of stores for ${productId}`,
             text: data.rows.map((row) => `${row.magazin} -> ${row.adresa}`).join('\n'),
             html: buildText(data),

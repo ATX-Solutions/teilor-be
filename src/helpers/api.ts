@@ -19,6 +19,15 @@ export const sendPredefinedResponse = (res: Response, statusCode: number) => {
             body = { statusCode, data: null, error: ReasonPhrases.NOT_FOUND, status: ReasonPhrases.NOT_FOUND };
             break;
         }
+        case StatusCodes.UNPROCESSABLE_ENTITY: {
+            body = {
+                statusCode,
+                data: null,
+                error: ReasonPhrases.UNPROCESSABLE_ENTITY,
+                status: ReasonPhrases.UNPROCESSABLE_ENTITY,
+            };
+            break;
+        }
         case StatusCodes.INTERNAL_SERVER_ERROR:
         default: {
             body = {

@@ -1,8 +1,8 @@
+import { StatusCodes } from 'http-status-codes';
 import express, { Request, Response } from 'express';
 
 import { findById } from './controller';
 import { sendPredefinedResponse } from '../../helpers/api';
-import { StatusCodes } from 'http-status-codes';
 
 const productsRouter = express.Router();
 

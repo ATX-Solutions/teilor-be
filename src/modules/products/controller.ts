@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import { Request, Response } from 'express';
+import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 
 import { sendProductEmail } from './helpers';
 import { ProductResponse } from './interfaces';
@@ -16,9 +16,13 @@ export const findById = async (req: Request, res: Response) => {
         return sendPredefinedResponse(res, StatusCodes.NOT_FOUND);
     }
 
+    if (!req.query.email) {
+        return sendPredefinedResponse(res, StatusCodes.UNPROCESSABLE_ENTITY);
+    }
+
     console.log(req.params.id); // 54270
 
-    // sendProductEmail(data.data, req.params.id);
+    // sendProductEmail(data.data, req.params.id, req.query.email as string);
     // return res.status(StatusCodes.OK).json(data);
 
     try {
@@ -27,7 +31,7 @@ export const findById = async (req: Request, res: Response) => {
         );
 
         // async "missed" on purpose. the email can be send after the response is returned.
-        sendProductEmail(data, req.params.id);
+        sendProductEmail(data, req.params.id, req.query.email as string);
 
         return sendResponse({ res, body: { statusCode: StatusCodes.OK, status: ReasonPhrases.OK, data, error: null } });
     } catch (e) {
